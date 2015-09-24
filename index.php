@@ -109,6 +109,7 @@
 		</div>
 		<div class="col-md-10">
 			<div class="row">
+			获取从main获得的结果插入到 grid中
 				<div class="col-md-4">
 					<div class="thumbnail">
 						<img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg">

@@ -9,6 +9,8 @@
 
 <!-- Start: Viral Lock Script to hide premium content -->
 <?php	
+
+//显示笔记信息 ，并隐藏下载按钮
 	/** Incude the Viral Locker Class **/
 	require_once( 'lock.class.php' );
 	/** New Viral Object **/
