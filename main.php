@@ -37,8 +37,13 @@ mysql_query("set character set 'utf8'");
 $rs= mysql_query("SELECT count(*) FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' OR `matirie` LIKE '%$keyWord%' OR `docname` LIKE '%$keyWord%' OR `prof` LIKE '%$keyWord%' ");
 $ntotal= mysql_fetch_array($rs);
 $pages= ceil($ntotal["count(*)"]/9);
+$npage=($page-1)*9;
+$offset= $page*9;
+
+
 //获取结果数据
-$result = mysql_query("SELECT * FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' OR `matirie` LIKE '%$keyWord%' OR `docname` LIKE '%$keyWord%' OR `prof` LIKE '%$keyWord%' ORDER BY 1 DESC LIMIT 9");
+$result = mysql_query("SELECT * FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' OR `matirie` LIKE '%$keyWord%' OR `docname` LIKE '%$keyWord%' OR `prof` LIKE '%$keyWord%' ORDER BY 1 DESC LIMIT 9, $npage=($page-1)*9;
+");
 //显示数据
 while($row = mysql_fetch_array($result))
   {
@@ -51,7 +56,7 @@ while($row = mysql_fetch_array($result))
 							</h3>
 							<p>
 							';
-							echo $row['ecole'] .$row['matirie'].$row['prof']."<br>".$row['niveau'].$row['annee'].$row['type'].'</p><p><a class="btn btn-primary" href="';
+							echo $row['ecole']."<br>".$row['matirie']."<br>".$row['prof']."<br>".$row['niveau']."<br>".$row['annee']."<br>".$row['type'].'</p><p><a class="btn btn-primary" href="';
 							echo $row['id'];
 	echo '">Action</a> <a class="btn" href="#">Action</a>
 							</p>
