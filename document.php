@@ -19,25 +19,20 @@
   </head>
   <body>
 		<?php 
-				$servername = "localhost";
-				$username = "doc";
-				$password = "";
-				$dbname = "doc";
+				include 'config.php';
 				if (isset($_GET["id"]))
 					{
-						$id= $_GET["id"]; 
+						$id= addslashes($_GET["id"]); 
 					}
 					else
 					{
-						$id=99;
+						$id=98500;
 					}
 				$con = mysql_connect("$servername","$username","$password");
 				if (!$con)
 				  {
 				  die('Could not connect: ' . mysql_error());
 				  }
-				mysql_select_db("$dbname", $con);
-				mysql_query("set character set 'utf8'");
 				mysql_select_db("$dbname", $con);
 				mysql_query("set character set 'utf8'");
 				$doc = mysql_query("SELECT * FROM `monamphi` WHERE `id`=$id");
@@ -77,7 +72,7 @@
 	
 	<div id="main" class="container">
 		
-		<div class="col-md-10">
+		<div class="col-md-9">
 			
 	
 		
@@ -87,15 +82,15 @@
 
 				<?php	
 				
-				while($info = mysql_fetch_array($doc))
-				{
+				$info = mysql_fetch_array($doc);
+				
 					//todo 替换掉读取数据中的空格
 					
 					
 					
 					echo "<div class='page-header'><h1>".$info['docname']."<h1></div>
-			<div class='row'>
-				<ul class='breadcrumb'>
+			<div >
+				<!--<ul class='breadcrumb'>
 					<li>
 						<a href='#'>Home</a> <span class='divider'></span>
 					</li>
@@ -109,20 +104,23 @@
 						".$info['docname']."
 					</li>
 				</ul>
+				-->
 			</div>
-			<div class='form-group'>
-				<ul>
-				<li><span><input class='form-control' readonly placeholder=".$info['ecole']."></span></li>
-				<li><span><input class='form-control' readonly placeholder=".$info['matirie']."></span></li>
-				<li><span><input class='form-control' readonly placeholder=".$info['prof']."></span></li>
-				<li><span><input class='form-control' readonly placeholder=".$info['niveau']."></span></li>
+	
+			<div class='col-md-12'><div class='row'>
+			<div class='well col-md-3' id='infos'>
+				
+				<div class='info'>Universite <br><a href='index.php?search=".$info['ecole']." '><span>".$info['ecole']."</span></a></div>
+				<div class='info'>Matière <br><a href='index.php?search=".$info['ecole']." '><span>".$info['matirie']."</span></a></div>
+				<div class='info'>Professeur <br><span>".$info['prof']."</span></div>
+				<div class='info'>Niveau  <br><span>".$info['niveau']."</span></div>
+				<div class='info'>Upload by <br><span>".$info['uploader']."</span></div>
+				<div class='info'>Année scolaire<br><span>".$info['annee']."</span></div>
+				<div class='info'>Type de Doc <br><span>".$info['type']."</span></div>
+				
+			</div>
 			
-				<li><span><input class='form-control' readonly  placeholder=".$info['uploader']."></span></li>
-				<li><span><input class='form-control' readonly placeholder=".$info['annee']."></span></li>
-				<li><span><input class='form-control' readonly placeholder=".$info['type']."></span></li>
-				</ul>
-			</div>
-			";} 
+			";
 			
 
 				//显示笔记信息 ，并隐藏下载按钮
@@ -139,7 +137,7 @@
 										// 'GURL' => 'http://www.google.com',
 										// 'FURL' => 'http://www.facebook.com',
 										'MESSAGE' => 'Partage pour telecharge document.',
-										'MY_ID' => 'doct',
+										'MY_ID' => $info['id'],
 										'TWEET' => '成功下载!'
 									);
 
@@ -184,17 +182,14 @@
 					{
 					?>
 						<!-- Content that needs to be hidden -->
-						<div >		
+						<div class='col-md-9' >		
 
-隐藏部分
+						<h2>le document que vous demande est prêt, vous pouvez commencer télécharger</h2>
+						<a type="button" class="btn btn-primary btn-lg" href="./download.php?id=<?php echo $info['id'];?>">Télécharger Gratuitement</a>
 						
-						<?php
 				
+						
 			
-			
-						?>
-				
-						</div>
 						<!-- End of hidden content -->
 						
 					<?php
@@ -205,12 +200,19 @@
 							<script type="text/javascript">
 								virallocker_use = true;
 							</script>
-							<div class="virallocker-box">
-								'.$message.'
-								
-								<div><a data-related="@monprofestfou" data-via="monprofestfou" data-hashtags="@monprofestfou" href="http://twitter.com/share" class="twitter-share-button" data-text="'.$tweet.'" data-url="'.$turl.'" data-count="vertical" data-size="large" >Tweet</a></div>
-								<div><g:plusone size="tall" annotation="bubble" callback="virallocker_plusone" href="'.$gurl.'"></g:plusone></div>
-								<div><fb:like id="fbLikeButton" href="'.$furl.'"  data-layout="box_count" show_faces="false" width="450"></fb:like></div>
+							<div class="virallocker-box col-md-9">
+								<div class="panel  panel-primary">
+									<div class="panel-heading">
+										<h3 class="panel-title">'.$message.'</h3>
+									</div>
+									<div  class="panel-body">
+										<div  id="share" class="center-block">
+											<div><a data-related="@monprofestfou" data-via="monprofestfou" data-hashtags="@monprofestfou" href="http://twitter.com/share" class="twitter-share-button" data-text="'.$tweet.'" data-url="'.$turl.'" data-count="vertical" data-size="default" >Tweet</a></div>
+											<div><g:plusone size="tall" annotation="bubble" callback="virallocker_plusone" href="'.$gurl.'"></g:plusone></div>
+											<div><fb:like id="fbLikeButton" href="'.$furl.'"  data-layout="box_count" show_faces="false" width="450"></fb:like></div>
+										</div>
+									</div>
+								</div>
 							</div>';
 					}
 				/** Include the required fb div and short code handler **/
@@ -218,6 +220,9 @@
 				mysql_close($con);
 				?>
 <!-- End: Viral Lock Script to hide premium content -->
+</div>
+						</div>
+						</div>
 		</div>
 	</div>
 </div>

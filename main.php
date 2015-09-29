@@ -1,10 +1,7 @@
 
 <?php
-$servername = "localhost";
-$username = "doc";
-$password = "";
-$dbname = "doc";
 
+ include 'config.php';
 
 if (isset($_GET["search"]))
 {
@@ -44,17 +41,17 @@ $result = mysql_query("SELECT * FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' 
 //显示数据
 while($row = mysql_fetch_array($result))
   {
-  echo ' <div class="col-md-4">
-					<div class="thumbnail">
+  echo ' <div class="col-md-4 ">
+					<div class="thumbnail panel ">
 						<div class="caption docs" >
 							<h3 class="tips" data-content="'; echo $row['docname'].'" rel="popover" data-placement="top" data-trigger="hover">
 							'; echo $row['docname'].'
 							</h3>
 							<p>
 							';
-							echo $row['ecole']."<br>".$row['matirie']."<br>".$row['prof'].'<br></p><p><a class="btn btn-primary" href="';
+							echo $row['ecole']."<br>".$row['matirie']."<br>".$row['prof'].'<br></p><p><a class="btn btn-primary" href="./document.php?id=';
 							echo $row['id'];
-	echo '">Action</a> <a class="btn" href="#">Action</a>
+	echo '">Action</a> 
 							</p>
 						</div>
 					</div>

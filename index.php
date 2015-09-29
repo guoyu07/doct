@@ -51,9 +51,17 @@
 			</nav>
 	</div>
 	<div id="main" class="row">
-		<div class="col-md-2">
+		<div class="col-md-3"> 
+			<ul class="nav nav-pills nav-stacked">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="#">Profile</a></li>
+  <li role="presentation"><a href="#">Messages</a></li> 
+</ul>
+
+<button type="button" class="btn btn-success btn-lg btn-block">（成功）Success</button>
+
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<div class="row">
 			
 			<?php include 'main.php' ?>

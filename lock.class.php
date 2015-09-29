@@ -61,10 +61,10 @@ class virallocker_class {
 	{
 	    /** Include the required styles and scripts for the VL script **/
 		echo '<style type="text/css">
-		.virallocker-box {background-color: #E0ECEF;border: 1px dashed #3B5998;padding: 10px 20px;	color: #000;text-align: left; margin-top: 5px; margin-bottom: 5px;border-radius: 5px;-moz-border-radius: 5px; font-weight: bold; font-family: Helvetica, Verdana, Arial, sans-serif;}
+		/* .virallocker-box {background-color: #E0ECEF;border: 1px dashed #3B5998;padding: 10px 20px;	color: #000;text-align: left; margin-top: 5px; margin-bottom: 5px;border-radius: 5px;-moz-border-radius: 5px; font-weight: bold; font-family: Helvetica, Verdana, Arial, sans-serif;}
 		.virallocker-box  div {margin-top: 5px;}
 		.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {display: none !important;}
-		.virallocker-box iframe {max-width: 600px !important;}
+		 */.virallocker-box iframe {max-width: 600px !important;}
 		</style>';
 		echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>';
 		echo '<script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>';
