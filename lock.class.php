@@ -30,7 +30,7 @@ class virallocker_class {
 			function virallocker_plusone(plusone) {
 				if (plusone.state == "on") {
 					var data = { action: "virallocker", myID: "'.$my_id.'"};
-					jQuery.post("viral-lock.class.php", data, function(response) {
+					jQuery.post("lock.class.php", data, function(response) {
 						if (virallocker_use) location.reload();					
 					});
 				}
@@ -39,7 +39,7 @@ class virallocker_class {
 			jQuery(document).ready(function() {
 				FB.Event.subscribe("edge.create", function(href) { 
 					var data = { action: "virallocker", myID: "'.$my_id.'"};
-					jQuery.post("viral-lock.class.php", data, function(response) {
+					jQuery.post("lock.class.php", data, function(response) {
 						if (virallocker_use) location.reload();					
 					});
 					
@@ -47,7 +47,7 @@ class virallocker_class {
 				twttr.ready(function (twttr) {
 					twttr.events.bind("tweet", function(event) {
 						var data = { action: "virallocker", myID: "'.$my_id.'"};
-						jQuery.post("viral-lock.class.php", data, function(response) {
+						jQuery.post("lock.class.php", data, function(response) {
 						if (virallocker_use) location.reload();					
 					});
 					});

@@ -21,13 +21,7 @@
 
     <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-			<div class="page-header">
-				<h1>
-					monprof! <small>monprof</small>
-				</h1>
-			</div>
-			<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 				<div class="navbar-header">
 					 
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -35,7 +29,7 @@
 					</button> <a class="navbar-brand" href="#">Brand</a>
 				</div>
 				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="collapse navbar-collapse" id="">
 					<ul class="nav navbar-nav">
 						
 					</ul>
@@ -55,9 +49,8 @@
 				</div>
 				
 			</nav>
-		</div>
 	</div>
-	<div class="row">
+	<div id="main" class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-10">
@@ -66,34 +59,21 @@
 			<?php include 'main.php' ?>
 			
 			</div>
-			
-			<ul class="pagination">
-			
-			
-			
-　　　	
-				<li>
-					<a href="#">Prev</a>
-				</li>
-				<li>
-					<a href="#">1</a>
-				</li>
-				<li>
-					<a href="#">2</a>
-				</li>
-				<li>
-					<a href="#">3</a>
-				</li>
-				<li>
-					<a href="#">4</a>
-				</li>
-				<li>
-					<a href="#">5</a>
-				</li>
-				<li>
-					<a href="#">Next</a>
-				</li>
-			</ul>
+			<?php 
+			echo "<ul class='pagination'>" ;
+
+if ($page > 1)
+{
+	echo "<li><a href='index.php?page=".$prev."'>Prev</a></li>  ";
+}
+
+if ($page < $pages)
+{
+echo "<li> <a href='index.php?page=".$next."'>Next</a></li> ";
+echo "<li><a href='index.php?page=".$last."'>Last</a> </li>";
+} 
+
+echo "</ul>";?>
 		</div>
 	</div>
 </div>
@@ -103,5 +83,8 @@
 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
+	<script>
+	$('.tips').popover();
+	</script>
   </body>
 </html>

@@ -1,82 +1,54 @@
 
 <?php
-　$conn=mysql_connect("localhost","root","");
-　//设定每一页显示的记录数
-　$pagesize=1;
-　mysql_select_db("mydata",$conn);
-　//取得记录总数$rs，计算总页数用
-　$rs=mysql_query("select count(*) from tb_product",$conn);
-　$myrow = mysql_fetch_array($rs);
-　$numrows=$myrow[0];
-　//计算总页数
+$servername = "localhost";
+				$username = "doc";
+				$password = "";
+				$dbname = "doc";
+				if (isset($_GET["id"]))
+					{
+						$id= $_GET["id"]; 
+					}
+					else
+					{
+						$id=99;
+					}
+				$con = mysql_connect("$servername","$username","$password");
+				if (!$con)
+				  {
+				  die('Could not connect: ' . mysql_error());
+				  }
 
-　$pages=intval($numrows/$pagesize);
-　if ($numrows%$pagesize)
-　　$pages++;
-　//设置页数
-　if (isset($_GET['page'])){
-　　$page=intval($_GET['page']);
-　}
-　else{
-　　//设置为第一页 
-　　$page=1;
-　}
-　//计算记录偏移量
-　$offset=$pagesize*($page - 1);
-　//读取指定记录数
-　$rs=mysql_query("select * from myTable order by id desc limit $offset,$pagesize",$conn);
-　if ($myrow = mysql_fetch_array($rs))
-　{
-　　$i=0;
-　　?＞
-　　＜table border="0" width="80%"＞
-　　＜tr＞
-　　　＜td width="50%" bgcolor="#E0E0E0"＞
-　　　　＜p align="center"＞标题＜/td＞
-　　　　＜td width="50%" bgcolor="#E0E0E0"＞
-　　　　＜p align="center"＞发布时间＜/td＞
-　　＜/tr＞
-　　＜?php
-　　　do {
-　　　　$i++;
-　　　　?＞
-　　＜tr＞
-　　　＜td width="50%"＞＜?=$myrow["news_title"]?＞＜/td＞
-　　　＜td width="50%"＞＜?=$myrow["news_cont"]?＞＜/td＞
-　　＜/tr＞
-　　　＜?php
-　　　}
-　　　while ($myrow = mysql_fetch_array($rs));
-　　　　echo "＜/table＞";
-　　}
-　　echo "＜div align='center'＞共有".$pages."页(".$page."/".$pages.")";
-　　for ($i=1;$i＜ $page;$i++)
-　　　echo "＜a href='fenye.php?page=".$i."'＞[".$i ."]＜/a＞ ";
-　　　echo "[".$page."]";
-　　　for ($i=$page+1;$i＜=$pages;$i++)
-　　　　echo "＜a href='fenye.php?page=".$i."'＞[".$i ."]＜/a＞ ";
-　　　　echo "＜/div＞";
-　　　?＞
-　　＜/body＞
-　　＜/html＞
 
-　　五、总结
-
-　　本例代码在windows2000 server+php4.4.0+mysql5.0.16上运行正常。该示例显示的分页格式是[1][2][3]…这样形式。假如想显示成“首页 上一页 下一页 尾页”这样形式，请加入以下代码：
-
-$first=1;
-$prev=$page-1;
-$next=$page+1;
-$last=$pages;
-
-if ($page ＞ 1)
-{
-　echo "＜a href='fenye.php?page=".$first."'＞首页＜/a＞ ";
-　echo "＜a href='fenye.php?page=".$prev."'＞上一页＜/a＞ ";
-}
-
-if ($page ＜ $pages)
-{
-　echo "＜a href='fenye.php?page=".$next."'＞下一页＜/a＞ 
-　echo "＜a href='fenye.php?page=".$last."'＞尾页＜/a＞ ";
-}
+				
+				mysql_select_db("$dbname", $con);
+				mysql_query("set character set 'utf8'");
+				
+				
+				$doc = mysql_query("SELECT * FROM `monamphi` WHERE `id`=55");
+				while($info = mysql_fetch_array($doc))
+				{echo $info['id'];
+			
+			
+			}
+			
+			$result = mysql_query("SELECT * FROM `monamphi` WHERE `ecole` LIKE 'paris'");
+//显示数据
+while($row = mysql_fetch_array($result))
+  {
+  echo ' <div class="col-md-4">
+					<div class="thumbnail">
+						<div class="caption docs" >
+							<h3 class="tips" data-content="'; echo $row['docname'].'" rel="popover" data-placement="top" data-trigger="hover">
+							'; echo $row['docname'].'
+							</h3>
+							<p>
+							';
+							echo $row['ecole']."<br>".$row['matirie']."<br>".$row['prof'].'<br></p><p><a class="btn btn-primary" href="';
+							echo $row['id'];
+	echo '">Action</a> <a class="btn" href="#">Action</a>
+							</p>
+						</div>
+					</div>
+				</div>';
+  } 
+			

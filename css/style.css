@@ -1,0 +1,16 @@
+.docs h3 {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;}
+	
+	
+.docs h3 .tips {
+display:none;
+}
+.docs h3:hover .tips {
+display:block;}
+
+#main {    margin-top: 80px;
+}

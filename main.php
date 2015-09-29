@@ -36,27 +36,23 @@ mysql_query("set character set 'utf8'");
 //求数据数量和总页数
 $rs= mysql_query("SELECT count(*) FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' OR `matirie` LIKE '%$keyWord%' OR `docname` LIKE '%$keyWord%' OR `prof` LIKE '%$keyWord%' ");
 $ntotal= mysql_fetch_array($rs);
-$pages= ceil($ntotal["count(*)"]/9);
-$npage=($page-1)*9;
-$offset= $page*9;
-
+$pages= ceil($ntotal["count(*)"]/12); 
+$offset=12*($page-1);
 
 //获取结果数据
-$result = mysql_query("SELECT * FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' OR `matirie` LIKE '%$keyWord%' OR `docname` LIKE '%$keyWord%' OR `prof` LIKE '%$keyWord%' ORDER BY 1 DESC LIMIT 9, $npage=($page-1)*9;
-");
+$result = mysql_query("SELECT * FROM `monamphi` WHERE `ecole` LIKE '%$keyWord%' OR `matirie` LIKE '%$keyWord%' OR `docname` LIKE '%$keyWord%' OR `prof` LIKE '%$keyWord%' ORDER BY 1 DESC LIMIT $offset ,12");
 //显示数据
 while($row = mysql_fetch_array($result))
   {
-  
   echo ' <div class="col-md-4">
 					<div class="thumbnail">
-						<div class="caption">
-							<h3>
-							'; echo $row['docname'] . '
+						<div class="caption docs" >
+							<h3 class="tips" data-content="'; echo $row['docname'].'" rel="popover" data-placement="top" data-trigger="hover">
+							'; echo $row['docname'].'
 							</h3>
 							<p>
 							';
-							echo $row['ecole']."<br>".$row['matirie']."<br>".$row['prof']."<br>".$row['niveau']."<br>".$row['annee']."<br>".$row['type'].'</p><p><a class="btn btn-primary" href="';
+							echo $row['ecole']."<br>".$row['matirie']."<br>".$row['prof'].'<br></p><p><a class="btn btn-primary" href="';
 							echo $row['id'];
 	echo '">Action</a> <a class="btn" href="#">Action</a>
 							</p>
@@ -72,16 +68,6 @@ $first=1;
 $prev=$page-1;
 $next=$page+1;
 $last=$pages;
-if ($page > 1)
-{
-	echo  $pages;
-	echo "<a href='index.php?page=".$prev."'>上一页</a> ";
-}
 
-if ($page < $pages)
-{
-echo "<a href='index.php?page=".$next."'>下一页</a> ";
-echo "<a href='index.php?page=".$last."'>尾页</a> ";
-} 
 mysql_close($con);
 ?>
